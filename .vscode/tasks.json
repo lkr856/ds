@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++", // 指定编译器
+            "args": [
+                "${workspaceFolder}/main.cpp", // 源文件
+                "${workspaceFolder}/bst/node.cpp", // 源文件
+                "-o", // 输出选项
+                "${workspaceFolder}/build/Debug/MyProject.exe", // 输出的可执行文件路径
+                "-g", // 包含调试信息
+                "-Wall", // 显示所有警告
+                "-std=c++11" // 指定 C++ 标准
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
