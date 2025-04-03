@@ -19,11 +19,19 @@ private:
    Vector< Vertex< Tv > > V; //节点列表
    Vector< Vector< Edge< Te > * > > E; //节点对应的边列表
 public:
-   GraphMatrix() { n = e = 0; } //n:图内节点个数
+   GraphMatrix() { _n = _e = 0; } //_n:图内节点个数
    ~GraphMatrix() { //
-      for ( int j = 0; j < n; j++ ) //遍历所有边删除
-         for ( int k = 0; k < n; k++ ) 
+      for ( int j = 0; j < _n; j++ ) //遍历所有边删除
+         for ( int k = 0; k < _n; k++ ) 
             delete E[j][k]; //二维数组会由Vector处理删除逻辑
    }
-   
+   virtual VStatus& status( int i){return V[i].status;}//返回节点的状态
+   virtual exists(int j,int j){return (0<=i) &&  ( i < _n ) && ( 0 <= j ) && ( j < _n ) && E[i][j] != NULL;}//i，j没超出范围且边存在
+   virtual int nextNbr ( int i, int j){ while((-1 < j) && (!exists(i , --j))); return j;} //只要第i个节点的第j条边不存在就继续往前探直到找到存在的边，返回i点的第j条边的序号j
+   virtual int firstNbr(int i){return nextNbr(i,_n); } //从序号大到小找第一个边
+   virtual EType& type( int i, int j){return E[i][j]->type;} //默认边是存在的
+   virtual int& parent( int i){return V[i].parent;} //可以更新父亲根据访问顺序
+   virtual int& dTime ( int i ) { return V[i].dTime; } //发现第i个结点的时间
+   virtual int& fTime ( int i ) { return V[i].fTime; } //访问结束第i个结点的时间
+   virtual Tv& vertex ( int i ) { return V[i].data; }
 }

@@ -23,7 +23,7 @@ ListNodePosi(T) ListNode<T>::insertAsSucc(T const &e)
 }
 
 template <typename T>
-void List<T>::init(){
+void List<T>::init(){//有两个哨兵
     _header = new ListNode<T>;
     _trailer = new ListNode<T>;
     _header->_succ = _trailer;_header->_pred = NULL;
@@ -34,12 +34,12 @@ void List<T>::init(){
 // 列表操作
 template <typename T>
 void List<T>::insertAsLast(T const & s){
-    _trailer->insertAsSucc(s);
+   _size ++; _trailer->insertAsPred(s);
 }
 
 template <typename T>
 void List<T>::insertAsFirst(T const & s){
-    _header->insertAsPred(s);
+    _size ++;  _header->insertAsSucc(s);
 }
 
 template <typename T>

@@ -15,7 +15,7 @@ template <typename T> struct ListNode {
 
 template <typename T> class List {
     private:
-        int _size; ListNodePosi(T) _header; ListNodePosi(T) _trailer; 
+        int _size; ListNodePosi(T) _header; ListNodePosi(T) _trailer; //_header _trailer 都是哨兵本身第一个是_header->succ 最后一个是_trailer->pred 
     protected:
         void init();
     public:
@@ -24,4 +24,5 @@ template <typename T> class List {
         ListNodePosi(T) first() const{return _header->_succ};//头的后一个(哨兵后)
         ListNodePosi(T) last() const{return _trailer->_pred};//末尾的前一个(哨兵前)
         T remove(ListNodePosi(T) p);
+        bool empty() const{return _size <= 0}; //size为0时列表为空
 };
